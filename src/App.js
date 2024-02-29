@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
   const [formData, setFormData] = useState({
     Perlitercost: "",
@@ -14,9 +17,22 @@ function App() {
     localStorage.setItem("formData", JSON.stringify(formData));
   }, [formData]);
 
+  // const handleInputChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setFormData({ ...formData, [name]: value });
+  // };
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    
+    // Check if the input value is a number or text
+    if (isNaN(value)) {
+      toast.info("Please enter value in numbers only");
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+    
+    
   };
 
   const handleSubmit = (event) => {
@@ -27,6 +43,7 @@ function App() {
 
   return (
     <div className="App">
+     <ToastContainer position="top-center" />
       {/* Heading text. */}
       <h1 className="text-4xl font-bold bg-white my-2 mx-8 py-4 px-8 w-max rounded-md">
         Vehicle Mileage Calcalutor
