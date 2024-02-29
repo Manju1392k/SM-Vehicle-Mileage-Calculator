@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [formData, setFormData] = useState({
@@ -24,15 +24,13 @@ function App() {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    
+
     // Check if the input value is a number or text
     if (isNaN(value)) {
       toast.info("Please enter value in numbers only");
     } else {
       setFormData({ ...formData, [name]: value });
     }
-    
-    
   };
 
   const handleSubmit = (event) => {
@@ -43,7 +41,7 @@ function App() {
 
   return (
     <div className="App">
-     <ToastContainer position="top-center" />
+      <ToastContainer position="top-center" />
       {/* Heading text. */}
       <h1 className="text-4xl font-bold bg-white my-2 mx-8 py-4 px-8 w-max rounded-md">
         Vehicle Mileage Calcalutor
@@ -58,6 +56,8 @@ function App() {
             name="vehicles"
             id="vehicles"
             className="bg-[#8A2BE2] outline-none rounded-sm text-sm text-white font-bold py-2 px-2"
+            value={formData.Vehiclestype}
+            onChange={handleInputChange}
           >
             <option value="none">Choose Vehicle</option>
             <option value="TW">2 Wheeler</option>
@@ -71,6 +71,8 @@ function App() {
             name="fuels"
             id="fuels"
             className="bg-[#8A2BE2] outline-none rounded-sm text-sm text-white font-bold py-2 px-2"
+            value={formData.Fueltype}
+            onChange={handleInputChange}
           >
             <option value="none">Choose Fuel</option>
             <option value="PT">Petrol</option>
