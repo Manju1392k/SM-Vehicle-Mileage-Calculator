@@ -52,16 +52,7 @@ export default function Home() {
     );
   };
 
-  const [vehicleData, setVehicleData] = useState(null);
-
-  useEffect(() => {
-    // Get data from localStorage and set it to state
-    const storedData = localStorage.getItem("VehiclData");
-    if (storedData) {
-      // Parse the stringified data back into an object
-      setVehicleData(JSON.parse(storedData));
-    }
-  }, []);
+  const allFieldsFilled = Object.values(VehiclData).every((field) => field !== '');
 
   return (
     <div className="App">
@@ -171,13 +162,28 @@ export default function Home() {
             required
           />
 
-          <Link to="/resultpage">
+          {/* <Link to="/resultpage">
             <input
               type="Submit"
               value="Submit"
               className="bg-[#8A2BE2] text-white font-bold my-2 px-3 py-2 rounded-md cursor-pointer focus:bg-[#b05bff] hover:bg-[#75479f]"
             />
-          </Link>
+          </Link> */}
+
+{allFieldsFilled ? <Link to="/resultpage">
+            <input
+              type="Submit"
+              value="Submit"
+              className="bg-[#8A2BE2] text-white font-bold my-2 px-3 py-2 rounded-md cursor-pointer focus:bg-[#b05bff] hover:bg-[#75479f]"
+            />
+          </Link> : 
+               <input
+               type="Submit"
+               value="Submit"
+               className="bg-[#8A2BE2] text-white font-bold my-2 px-3 py-2 rounded-md cursor-pointer focus:bg-[#b05bff] hover:bg-[#75479f]"
+             />
+          }
+
         </form>
       </div>
     </div>
