@@ -16,7 +16,7 @@ function App() {
     // Save formData to local storage whenever it changes
     localStorage.setItem("formData", JSON.stringify(formData));
   }, [formData]);
-  
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
 
@@ -28,11 +28,18 @@ function App() {
     }
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Do something with formData (e.g., send to server)
-    console.log("Form data submitted:", formData);
-  };
+    const [selectedGender, setSelectedGender] = useState('');
+
+    const handleChange = (event) => {
+        setSelectedGender(event.target.value);
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        localStorage.setItem('gender', selectedGender);
+        console.log('form submited', selectedGender)
+        console.log('form submited2', formData)
+    };
 
   return (
     <div className="App">
@@ -51,8 +58,7 @@ function App() {
             name="vehicles"
             id="vehicles"
             className="bg-[#8A2BE2] outline-none rounded-sm text-sm text-white font-bold py-2 px-2"
-            value={formData.Vehiclestype}
-            onChange={handleInputChange}
+            value={selectedGender} onChange={handleChange}
           >
             <option value="none">Choose Vehicle</option>
             <option value="TW">2 Wheeler</option>
@@ -66,8 +72,6 @@ function App() {
             name="fuels"
             id="fuels"
             className="bg-[#8A2BE2] outline-none rounded-sm text-sm text-white font-bold py-2 px-2"
-            value={formData.Fueltype}
-            onChange={handleInputChange}
           >
             <option value="none">Choose Fuel</option>
             <option value="PT">Petrol</option>
