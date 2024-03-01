@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  const [formData, setFormData] = useState({
+  const [VehiclData, setVehicledata] = useState({
     Perlitercost: "",
     Totalamount: "",
     Density: "",
@@ -14,8 +14,8 @@ function App() {
 
   useEffect(() => {
     // Save formData to local storage whenever it changes
-    localStorage.setItem("formData", JSON.stringify(formData));
-  }, [formData]);
+    localStorage.setItem("VehiclData", JSON.stringify(VehiclData));
+  }, [VehiclData]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -24,7 +24,7 @@ function App() {
     if (isNaN(value)) {
       toast.info("Please enter value in numbers only");
     } else {
-      setFormData({ ...formData, [name]: value });
+      setVehicledata({ ...VehiclData, [name]: value });
     }
   };
 
@@ -38,15 +38,25 @@ function App() {
       setSelectedfuel(event.target.value);
     };
 
-
     const handleSubmit = (event) => {
         event.preventDefault();
         localStorage.setItem('Vehicletype', SelectVehicle);
         localStorage.setItem('Fueltype', SelectFuel);
         console.log('Vehicle Type', SelectVehicle)
         console.log('Fuel Type', SelectFuel)
-        console.log('Information abut fuel amount', formData)
+        console.log('Information abut fuel amount, density, first meter reading, second meter reading etc', VehiclData)
     };
+
+    const [vehicleData, setVehicleData] = useState(null);
+
+    useEffect(() => {
+      // Get data from localStorage and set it to state
+      const storedData = localStorage.getItem('VehiclData');
+      if (storedData) {
+        // Parse the stringified data back into an object
+        setVehicleData(JSON.parse(storedData));
+      }
+    }, []);
 
   return (
     <div className="App">
@@ -82,9 +92,9 @@ function App() {
             value={SelectFuel} onChange={handleChangetwo}
           >
             <option value="Not Selected">Choose Fuel</option>
-            <option value="PT">Petrol</option>
-            <option value="DI">Diesel </option>
-            <option value="OV">Other Fuel</option>
+            <option value="Petrol">Petrol</option>
+            <option value="Diesel">Diesel </option>
+            <option value="Other Fuel">Other Fuel</option>
           </select>
 
           {/* Per liter cost input */}
@@ -96,7 +106,7 @@ function App() {
             name="Perlitercost"
             placeholder="Per liter Cost"
             className="w-full px-2 py-2 rounded-sm outline-none border-2 focus:border-[#8A2BE2]"
-            value={formData.Perlitercost}
+            value={VehiclData.Perlitercost}
             onChange={handleInputChange}
             required
           />
@@ -110,7 +120,7 @@ function App() {
             name="Totalamount"
             placeholder="Fuel Density"
             className="w-full px-2 py-2 rounded-sm outline-none border-2 focus:border-[#8A2BE2]"
-            value={formData.Totalamount}
+            value={VehiclData.Totalamount}
             onChange={handleInputChange}
             required
           />
@@ -122,7 +132,7 @@ function App() {
             name="Density"
             placeholder="Fuel Density (optional)"
             className="w-full px-2 py-2 rounded-sm outline-none border-2 focus:border-[#8A2BE2]"
-            value={formData.Density}
+            value={VehiclData.Density}
             onChange={handleInputChange}
           />
 
@@ -135,7 +145,7 @@ function App() {
             name="Firstmeterreading"
             placeholder="Enter First Meter Reading. First time Refill Meter Reading"
             className="w-full px-2 py-2 rounded-sm outline-none border-2 focus:border-[#8A2BE2]"
-            value={formData.Firstmeterreading}
+            value={VehiclData.Firstmeterreading}
             onChange={handleInputChange}
             required
           />
@@ -149,7 +159,7 @@ function App() {
             name="Secondmeterreading"
             placeholder="Enter First Meter Reading. Second time Refill Meter Reading"
             className="w-full px-2 py-2 rounded-sm outline-none border-2 focus:border-[#8A2BE2]"
-            value={formData.Secondmeterreading}
+            value={VehiclData.Secondmeterreading}
             onChange={handleInputChange}
             required
           />
@@ -162,6 +172,18 @@ function App() {
           />
         </form>
       </div>
+
+    {/* Results Page */}
+    <div className="ResultPage w-full h-full bg-black text-white">
+    {vehicleData && (
+        <div>
+          <p>Vehicle Name: {vehicleData.Perlitercost}</p>
+          <p>Vehicle Model: {vehicleData.Firstmeterreading}</p>
+          {/* Add more fields as necessary */}
+        </div>
+      )}
+    </div>
+
     </div>
   );
 }
