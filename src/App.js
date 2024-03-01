@@ -16,12 +16,7 @@ function App() {
     // Save formData to local storage whenever it changes
     localStorage.setItem("formData", JSON.stringify(formData));
   }, [formData]);
-
-  // const handleInputChange = (event) => {
-  //   const { name, value } = event.target;
-  //   setFormData({ ...formData, [name]: value });
-  // };
-
+  
   const handleInputChange = (event) => {
     const { name, value } = event.target;
 
