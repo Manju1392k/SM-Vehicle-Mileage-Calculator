@@ -5,6 +5,8 @@ import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { Link } from 'react-router-dom';
+
 export default function Home() {
   
 
@@ -172,11 +174,14 @@ export default function Home() {
               />
     
               {/* Submit button */}
-              <input
-                type="submit"
-                value="Show results"
-                className="bg-[#8A2BE2] text-white font-bold my-2 px-3 py-2 rounded-md cursor-pointer focus:bg-[#b05bff] hover:bg-[#75479f]"
-              />
+              <Link to='/resultpage'>
+    <input
+        type="Submit"
+        value="Show results"
+        className="bg-[#8A2BE2] text-white font-bold my-2 px-3 py-2 rounded-md cursor-pointer focus:bg-[#b05bff] hover:bg-[#75479f]"
+    />
+</Link>
+           
             </form>
           </div>
     
