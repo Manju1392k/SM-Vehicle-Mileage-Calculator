@@ -28,17 +28,24 @@ function App() {
     }
   };
 
-    const [selectedGender, setSelectedGender] = useState('');
+    const [SelectVehicle, setSelectedvehicle] = useState('Not Selected');
+    const [SelectFuel, setSelectedfuel] = useState('Not Selected');
 
     const handleChange = (event) => {
-        setSelectedGender(event.target.value);
+      setSelectedvehicle(event.target.value);
     };
+    const handleChangetwo = (event) => {
+      setSelectedfuel(event.target.value);
+    };
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        localStorage.setItem('gender', selectedGender);
-        console.log('form submited', selectedGender)
-        console.log('form submited2', formData)
+        localStorage.setItem('Vehicletype', SelectVehicle);
+        localStorage.setItem('Fueltype', SelectFuel);
+        console.log('Vehicle Type', SelectVehicle)
+        console.log('Fuel Type', SelectFuel)
+        console.log('Information abut fuel amount', formData)
     };
 
   return (
@@ -58,12 +65,12 @@ function App() {
             name="vehicles"
             id="vehicles"
             className="bg-[#8A2BE2] outline-none rounded-sm text-sm text-white font-bold py-2 px-2"
-            value={selectedGender} onChange={handleChange}
+            value={SelectVehicle} onChange={handleChange}
           >
-            <option value="none">Choose Vehicle</option>
-            <option value="TW">2 Wheeler</option>
-            <option value="4W">4 Wheeler </option>
-            <option value="OV">Other Vehicle</option>
+            <option value="Not Selected">Choose Vehicle</option>
+            <option value="2 Wheeler">2 Wheeler</option>
+            <option value="4 Wheeler ">4 Wheeler </option>
+            <option value="Other Vehicle">Other Vehicle</option>
           </select>
 
           {/* Fuel type input */}
@@ -72,8 +79,9 @@ function App() {
             name="fuels"
             id="fuels"
             className="bg-[#8A2BE2] outline-none rounded-sm text-sm text-white font-bold py-2 px-2"
+            value={SelectFuel} onChange={handleChangetwo}
           >
-            <option value="none">Choose Fuel</option>
+            <option value="Not Selected">Choose Fuel</option>
             <option value="PT">Petrol</option>
             <option value="DI">Diesel </option>
             <option value="OV">Other Fuel</option>
