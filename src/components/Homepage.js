@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 
 import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Home() {
 
@@ -26,21 +27,27 @@ function Home() {
       });
     };
 
-    // Function to change and work the inputs with keyboard. And to Store 'VehicleData' in localstorage
-    var handleSubmit = (event) => {
-      event.preventDefault();
-      localStorage.setItem('VehicleData', JSON.stringify(VehicleData));
-    };
+    // Checking inputs are in number format and saving VehicleData in localstorage.
+    if (isNaN(VehicleData.FuelPrice) || isNaN(VehicleData.TotalAmount) || isNaN(VehicleData.FuelDensity) || isNaN(VehicleData.FirstFuelPoint) || isNaN(VehicleData.SecondFuelPoint)) {
+      toast.info('Please enter values in number format only.')
+    } else {
+      var handleSubmit = (event) => {
+        event.preventDefault();
+        localStorage.setItem('VehicleData', JSON.stringify(VehicleData));
+      };
+    }
 
   } catch (error) {
-    toast.info("Something went wrong. Please try later")
+    toast("Something went wrong. Please try later")
   };
   return (
     <>
-      <ToastContainer />
 
       {/* Div for Heading */}
       <div className="w-full grid justify-center">
+        <ToastContainer
+          position="top-center"
+        />
         <h1 className="text-3xl bg-white w-max py-4 px-4 mt-3 rounded-md font-bold">SM Vehicle Mileage Calculator</h1>
 
         {/* Div for form background */}
@@ -65,7 +72,7 @@ function Home() {
 
             {/* Input for to take Pertol or Diesel per liter cost */}
             <h1 className='font-semibold text-xl'>Fuel Per liter Cost</h1>
-            <input className="mb-2 py-2 px-2 rounded-md w-full outline-none border-2 focus:border-[#7741f6]" type="tel" name="FuelPrice" onChange={handleChange} placeholder="Per liter of fuel" required />
+            <input className="mb-2 py-2 px-2 rounded-md w-full outline-none border-2 focus:border-[#7741f6]" type="tel" name="FuelPrice" onChange={handleChange} placeholder="Per liter of fuel in Rupess" required />
 
             {/* Input for to take how much price pertol or diesel is filled in tank */}
             <h1 className='font-semibold text-xl'>Total Refill of Fuel Amout</h1>
@@ -73,16 +80,15 @@ function Home() {
 
             {/* Input for to take the pertol or diesel density */}
             <h1 className='font-semibold text-xl'>Fuel Density</h1>
-            <input className="mb-2 py-2 px-2 rounded-md w-full outline-none border-2 focus:border-[#7741f6]" type="tel" name="FuelDensity" onChange={handleChange} placeholder="Fuel Density (optional)" />
+            <input className="mb-2 py-2 px-2 rounded-md w-full outline-none border-2 focus:border-[#7741f6]" type="tel" name="FuelDensity" onChange={handleChange} placeholder="Fuel Density (optional) in numbers" />
 
             {/* Input for to take the first fuel stop point meter reading */}
             <h1 className='font-semibold text-xl'>First Fuel Point Meter Reading</h1>
-            <input className="mb-2 py-2 px-2 rounded-md w-full outline-none border-2 focus:border-[#7741f6]" type="tel" name="FirstFuelPoint" onChange={handleChange} placeholder="First Fuel Point Meter Reading. Enter First Refill Fuel Meter Reading" required />
-
+            <input className="mb-2 py-2 px-2 rounded-md w-full outline-none border-2 focus:border-[#7741f6]" type="tel" name="FirstFuelPoint" onChange={handleChange} placeholder="First Fuel Point Meter Reading. Enter First Refill Fuel Meter Reading in numbers format" required />
 
             {/* Input for to take the Second fuel stop point meter reading */}
             <h1 className='font-semibold text-xl'>Second Fuel Point Meter Reading</h1>
-            <input className="mb-2 py-2 px-2 rounded-md w-full outline-none border-2 focus:border-[#7741f6]" type="tel" name="SecondFuelPoint" onChange={handleChange} placeholder="Second Fuel Point Meter Reading. Enter Second Refill Fuel Meter Reading" required />
+            <input className="mb-2 py-2 px-2 rounded-md w-full outline-none border-2 focus:border-[#7741f6]" type="tel" name="SecondFuelPoint" onChange={handleChange} placeholder="Second Fuel Point Meter Reading. Enter Second Refill Fuel Meter Reading in numbers format" required />
 
             {/* Button for submitting VehicleData to localStorage */}
             <button className="bg-[#7741f6] py-2 px-6 rounded-lg text-white font-semibold hover:bg-[#8b5aff] active:bg-[#592bc3]" type="submit">Show Results</button>
