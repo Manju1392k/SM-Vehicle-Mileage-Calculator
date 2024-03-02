@@ -116,7 +116,7 @@ export default function Home() {
           <input
             type="tel"
             name="Totalamount"
-            placeholder="Fuel Density"
+            placeholder="Total Amount of Fuel"
             className="w-full px-2 py-2 rounded-sm outline-none border-2 focus:border-[#8A2BE2]"
             value={VehiclData.Totalamount}
             onChange={handleInputChange}
@@ -141,7 +141,7 @@ export default function Home() {
           <input
             type="tel"
             name="Firstmeterreading"
-            placeholder="Enter First Meter Reading. First time Refill Meter Reading"
+            placeholder="Enter First Meter Reading. First Fuel Stop Refill Meter Reading"
             className="w-full px-2 py-2 rounded-sm outline-none border-2 focus:border-[#8A2BE2]"
             value={VehiclData.Firstmeterreading}
             onChange={handleInputChange}
@@ -155,20 +155,12 @@ export default function Home() {
           <input
             type="tel"
             name="Secondmeterreading"
-            placeholder="Enter First Meter Reading. Second time Refill Meter Reading"
+            placeholder="Enter First Meter Reading. Second Fuel Stop Refill Meter Reading"
             className="w-full px-2 py-2 rounded-sm outline-none border-2 focus:border-[#8A2BE2]"
             value={VehiclData.Secondmeterreading}
             onChange={handleInputChange}
             required
           />
-
-          {/* <Link to="/resultpage">
-            <input
-              type="Submit"
-              value="Submit"
-              className="bg-[#8A2BE2] text-white font-bold my-2 px-3 py-2 rounded-md cursor-pointer focus:bg-[#b05bff] hover:bg-[#75479f]"
-            />
-          </Link> */}
 
 {allFieldsFilled ? <Link to="/resultpage">
             <input

@@ -18,6 +18,7 @@ export default function Resutlpage() {
   async function calculateMileagePerLiter(vehicleData) {
     try {
       // Retrieve the Secondmeterreading value from local storage
+      // eslint-disable-next-line no-unused-vars
       const secondMeterReading = await getSecondMeterReadingFromLocalStorage();
 
       // Calculate totalMileage
