@@ -3,14 +3,20 @@ import React, { useState, useEffect } from "react";
 
 export default function Resutlpage() {
   const [vehicleData, setVehicleData] = useState(null);
+  const [VehicleType, setVehicleType] = useState(null);
   // const [vehicleData, setVehicleData] = useState(null);
 
   useEffect(() => {
     // Get data from localStorage and set it to state
     const storedData = localStorage.getItem('VehiclData');
+    const storedDatatwo = localStorage.getItem('Vehicletype');
     if (storedData) {
       // Parse the stringified data back into an object
       setVehicleData(JSON.parse(storedData));
+    }
+    if (storedDatatwo) {
+      // Parse the stringified data back into an object
+      setVehicleType(JSON.parse(storedDatatwo));
     }
   }, []);
 
@@ -73,7 +79,7 @@ export default function Resutlpage() {
     <>
       {vehicleData ?
         <div>
-          <p>Vehicle Type: { }</p>
+          <p>Vehicle Type: {VehicleType}</p>
           <p>Fuel Type: { }</p>
           <p>Fuel per liter cost: {vehicleData.Perlitercost} Rs</p>
           <p>Fuel Density: {vehicleData.Density}</p>
