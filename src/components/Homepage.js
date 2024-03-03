@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { Link } from "react-router-dom";
+
 function Home() {
 
   // Wrapping total code in 'try & catch to avoid crashes'.
@@ -41,6 +43,8 @@ function Home() {
       event.preventDefault();
       localStorage.setItem('VehicleData', JSON.stringify(VehicleData));
     };
+
+    var allFieldsFilled = Object.values(VehicleData).every((field) => field !== '');
 
   } catch (error) {
     toast("Something went wrong. Please try later")
@@ -96,8 +100,20 @@ function Home() {
             <h1 className='font-semibold text-xl'>Second Fuel Point Meter Reading</h1>
             <input className="mb-2 py-2 px-2 rounded-md w-full outline-none border-2 focus:border-[#7741f6]" type="tel" name="SecondFuelPoint" onChange={handleChange} placeholder="Second Fuel Point Meter Reading. Enter Second Refill Fuel Meter Reading in numbers format" required />
 
-            {/* Button for submitting VehicleData to localStorage */}
-            <button className="bg-[#7741f6] py-2 px-6 rounded-lg text-white font-semibold hover:bg-[#8b5aff] active:bg-[#592bc3]" type="submit">Show Results</button>
+            {/* When all the inputs are filled then this button will redirect resultspage or if the fields are not filled properly then it work has a button. */}
+            {allFieldsFilled ? <>
+              <Link to="/resultpage">
+                {/* Button for submitting VehicleData to localStorage */}
+                <button className="bg-[#7741f6] py-2 px-6 rounded-lg text-white font-semibold hover:bg-[#8b5aff] active:bg-[#592bc3]" type="submit">Show Results</button>
+              </Link>
+            </>
+              :
+              <>
+                {/* Button for submitting VehicleData to localStorage */}
+                <button className="bg-[#7741f6] py-2 px-6 rounded-lg text-white font-semibold hover:bg-[#8b5aff] active:bg-[#592bc3]" type="submit">Show Results</button>
+              </>
+
+            }
 
           </form>
         </div>
