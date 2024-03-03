@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 
 import React, { useState } from 'react';
 
@@ -38,13 +39,26 @@ function Home() {
       };
     }
 
-    // Function to save 'VehicleData in localStorage'
+    // Function to save 'VehicleData in json file'
     var handleSubmit = (event) => {
       event.preventDefault();
-      localStorage.setItem('VehicleData', JSON.stringify(VehicleData));
+
+      fetch('http://localhost:3001/save', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(VehicleData),
+      })
+        .then((response) => response.text())
+        .then((data) => console.log(data))
+        .catch((error) => console.error('Error:', error));
+        toast.success('Data is saved')
     };
 
-    var allFieldsFilled = Object.values(VehicleData).every((field) => field !== '');
+
+
+    // var allFieldsFilled = Object.values(VehicleData).every((field) => field !== '');
 
   } catch (error) {
     toast("Something went wrong. Please try later")
@@ -62,7 +76,7 @@ function Home() {
 
         {/* Div for form background */}
         <div className=" bg-white w-[95vw] py-4 px-4 my-3 rounded-md ">
-          <form className="flex flex-col items-start" onSubmit={handleSubmit}>
+          <form className="flex flex-col items-start" method="post" onSubmit={handleSubmit}>
 
             {/* Select menu for To Choose Vehicle Type */}
             <select className="my-2 bg-[#7741f6] text-white font-semibold py-2 px-2 rounded-md outline-none" name="vehicletype" onChange={handleChange} required={true}>
@@ -101,19 +115,9 @@ function Home() {
             <input className="mb-2 py-2 px-2 rounded-md w-full outline-none border-2 focus:border-[#7741f6]" type="tel" name="SecondFuelPoint" onChange={handleChange} placeholder="Second Fuel Point Meter Reading. Enter Second Refill Fuel Meter Reading in numbers format" required />
 
             {/* When all the inputs are filled then this button will redirect resultspage or if the fields are not filled properly then it work has a button. */}
-            {allFieldsFilled ? <>
-              <Link to="/resultpage">
-                {/* Button for submitting VehicleData to localStorage */}
-                <button className="bg-[#7741f6] py-2 px-6 rounded-lg text-white font-semibold hover:bg-[#8b5aff] active:bg-[#592bc3]" type="submit">Show Results</button>
-              </Link>
-            </>
-              :
-              <>
-                {/* Button for submitting VehicleData to localStorage */}
-                <button className="bg-[#7741f6] py-2 px-6 rounded-lg text-white font-semibold hover:bg-[#8b5aff] active:bg-[#592bc3]" type="submit">Show Results</button>
-              </>
 
-            }
+             {/* Button for submitting VehicleData to localStorage */}
+             <button className="bg-[#7741f6] py-2 px-6 rounded-lg text-white font-semibold hover:bg-[#8b5aff] active:bg-[#592bc3]" type="submit">Show Results</button>
 
           </form>
         </div>

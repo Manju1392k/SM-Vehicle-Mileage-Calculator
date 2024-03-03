@@ -1,0 +1,13 @@
+ {allFieldsFilled ? <>
+              <Link to="/resultpage">
+                {/* Button for submitting VehicleData to localStorage */}
+                <button className="bg-[#7741f6] py-2 px-6 rounded-lg text-white font-semibold hover:bg-[#8b5aff] active:bg-[#592bc3]" type="submit">Show Results</button>
+              </Link>
+            </>
+              :
+              <>
+                {/* Button for submitting VehicleData to localStorage */}
+                <button className="bg-[#7741f6] py-2 px-6 rounded-lg text-white font-semibold hover:bg-[#8b5aff] active:bg-[#592bc3]" type="submit">Show Results</button>
+              </>
+
+            }
