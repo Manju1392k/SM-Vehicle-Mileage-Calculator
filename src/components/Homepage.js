@@ -19,27 +19,33 @@ function Home() {
       SecondFuelPoint: '',
     });
 
-    // Function to change and work the inputs with keyboard.
+    // Function for validation and updating the state
     var handleChange = (event) => {
-      setVehicleData({
-        ...VehicleData,
-        [event.target.name]: event.target.value
-      });
-    };
+      // Copy the VehicleData object
+      const newVehicleData = { ...VehicleData };
 
-    // Checking inputs are in number format and saving VehicleData in localstorage.
-    if (isNaN(VehicleData.FuelPrice) || isNaN(VehicleData.TotalAmount) || isNaN(VehicleData.FuelDensity) || isNaN(VehicleData.FirstFuelPoint) || isNaN(VehicleData.SecondFuelPoint)) {
-      toast.info('Please enter values in number format only.')
-    } else {
-      var handleSubmit = (event) => {
-        event.preventDefault();
-        localStorage.setItem('VehicleData', JSON.stringify(VehicleData));
+      // Updating the value in inputs
+      newVehicleData[event.target.name] = event.target.value;
+
+      // Check if the new value is a number in all fields
+      if (isNaN(newVehicleData.FuelPrice) || isNaN(newVehicleData.TotalAmount) || isNaN(newVehicleData.FuelDensity) || isNaN(newVehicleData.FirstFuelPoint) || isNaN(newVehicleData.SecondFuelPoint)) {
+        toast.info('Please enter values in number format only.')
+      } else {
+        // If all inputs are numbers, update the state
+        setVehicleData(newVehicleData);
       };
     }
+
+    // Function to save 'VehicleData in localStorage'
+    var handleSubmit = (event) => {
+      event.preventDefault();
+      localStorage.setItem('VehicleData', JSON.stringify(VehicleData));
+    };
 
   } catch (error) {
     toast("Something went wrong. Please try later")
   };
+
   return (
     <>
 
