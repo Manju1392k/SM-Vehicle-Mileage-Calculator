@@ -45,13 +45,19 @@ export default function Resutlpage() {
     } catch (error) {
       toast("Something went wrong. Please try later");
     }
-  }, []); // Empty dependency array means this useEffect will only run once when the component mounts
+  }, []);
 
-  console.log(vehicleData)
-
+  // Get Fuel Type
   var FuelType = vehicleData.fueltype
 
+  // Calculating total mileage given by vehicle
   var TotalMileage = vehicleData.SecondFuelPoint - vehicleData.FirstFuelPoint
+
+  // Calculating how fuel get in tank
+  var FuelgetinTank = vehicleData.TotalAmount / vehicleData.FuelPrice
+
+  // Calculating how vehicle give mileage for per liter fuel
+  var Perlitermileage = TotalMileage / FuelgetinTank
 
   return (
     <>
@@ -83,7 +89,13 @@ export default function Resutlpage() {
             {FuelType} Density: <span className="font-bold">{vehicleData.FuelDensity}</span>
           </h1>
           <h1 className="text-lg mt-1 font-semibold">
-            Total Mileage by {vehicleData.vehicletype}: <span className="font-bold">{TotalMileage.toFixed(2)} kms</span>
+            Total Mileage given by your {vehicleData.vehicletype}: <span className="font-bold">{TotalMileage.toFixed(2)} kms</span>
+          </h1>
+          <h1 className="text-lg mt-1 font-semibold">
+            Total {FuelType} get in your {vehicleData.vehicletype} Tank: <span className="font-bold">{FuelgetinTank.toFixed(2)} L</span>
+          </h1>
+          <h1 className="text-lg mt-1 font-semibold">
+            Your {vehicleData.vehicletype} given Mileage for Per liter of {FuelType}:<span className="font-bold"> {Perlitermileage.toFixed(2)} kms</span>
           </h1>
         </div>
       </div>

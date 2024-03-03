@@ -53,7 +53,7 @@ function Home() {
         .then((response) => response.text())
         .then((data) => console.log(data))
         .catch((error) => console.error('Error:', error));
-      toast.success('Data is saved')
+      toast.success('Your VehicleData is saved successfully. Now click on Show Result button')
     };
 
     var allFieldsFilled = Object.values(VehicleData).every((field) => field !== '');
