@@ -1,11 +1,13 @@
 /* eslint-disable no-unused-vars */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import moment from "moment-timezone";
+
+import { useScreenshot } from 'use-react-screenshot'
 
 export default function Resutlpage() {
 
@@ -59,6 +61,22 @@ export default function Resutlpage() {
   // Calculating how vehicle give mileage for per liter fuel
   var Perlitermileage = TotalMileage / FuelgetinTank
 
+  var ref = useRef(null)
+  var [image, takeScreenshot] = useScreenshot()
+  // Function to take screenshort
+  const captureScreenshot = () => {
+    try {
+      takeScreenshot(ref.current).then((dataUrl) => {
+        const link = document.createElement('a')
+        link.href = dataUrl
+        link.download = 'screenshot.png'
+        link.click()
+      })
+    } catch (error) {
+      toast("Something went wrong. Please try later")
+    }
+  }
+
   return (
     <>
       <ToastContainer position="top-center" />
@@ -69,7 +87,7 @@ export default function Resutlpage() {
           Results Page
         </h1>
         {/* Div for form background */}
-        <div className=" bg-white w-[95vw] py-4 px-4 my-3 rounded-md ">
+        <div ref={ref} className=" bg-white w-[95vw] py-4 px-4 my-3 rounded-md ">
           <h1 className="text-xl font-semibold">
             Date & Time: <span className="font-bold">{datetime.format('MMMM Do YYYY, h:mm a')}</span>
           </h1>
@@ -100,6 +118,7 @@ export default function Resutlpage() {
 
           {/* Div for screenshort and pdf download buttons */}
           <div className="flex flex-wrap my-6">
+
             {/* Button to Download Results in pdf format*/}
             <button
               className="bg-[#7741f6] py-2 px-6 rounded-lg text-white font-semibold hover:bg-[#8b5aff] active:bg-[#592bc3]"
@@ -107,6 +126,11 @@ export default function Resutlpage() {
             >
               Download PDF
             </button>
+            {/* Button to take screen short in image format and saving in device */}
+            <div>
+              <button className="mx-2 bg-[#7741f6] py-2 px-6 rounded-lg text-white font-semibold hover:bg-[#8b5aff] active:bg-[#592bc3]" onClick={captureScreenshot}>Take screenshot</button>
+            </div>
+
           </div>
 
         </div>
