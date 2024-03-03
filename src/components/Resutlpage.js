@@ -115,22 +115,21 @@ export default function Resutlpage() {
           <h1 className="text-lg mt-1 font-semibold">
             Your {vehicleData.vehicletype} given Mileage for Per liter of {FuelType}:<span className="font-bold"> {Perlitermileage.toFixed(2)} kms</span>
           </h1>
+        </div>
 
-          {/* Div for screenshort and pdf download buttons */}
-          <div className="flex flex-wrap my-6">
+        {/* Div for screenshort and pdf download buttons */}
+        <div className="flex flex-wrap my-6">
 
-            {/* Button to Download Results in pdf format*/}
-            <button
-              className="bg-[#7741f6] py-2 px-6 rounded-lg text-white font-semibold hover:bg-[#8b5aff] active:bg-[#592bc3]"
-              onClick={() => window.print()}
-            >
-              Download PDF
-            </button>
-            {/* Button to take screen short in image format and saving in device */}
-            <div>
-              <button className="mx-2 bg-[#7741f6] py-2 px-6 rounded-lg text-white font-semibold hover:bg-[#8b5aff] active:bg-[#592bc3]" onClick={captureScreenshot}>Take screenshot</button>
-            </div>
-
+          {/* Button to Download Results in pdf format*/}
+          <button
+            className="bg-[#7741f6] py-2 px-6 rounded-lg text-white font-semibold hover:bg-[#8b5aff] active:bg-[#592bc3]"
+            onClick={() => window.print()}
+          >
+            Download PDF
+          </button>
+          {/* Button to take screen short in image format and saving in device */}
+          <div>
+            <button className="mx-2 bg-[#7741f6] py-2 px-6 rounded-lg text-white font-semibold hover:bg-[#8b5aff] active:bg-[#592bc3]" onClick={captureScreenshot}>Take screenshot</button>
           </div>
 
         </div>
