@@ -1,0 +1,9 @@
+{
+  "vehicletype": "2 Wheeler",
+  "fueltype": "Petrol",
+  "FuelPrice": "45",
+  "TotalAmount": "25",
+  "FuelDensity": "42",
+  "FirstFuelPoint": "42",
+  "SecondFuelPoint": "42"
+}
