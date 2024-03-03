@@ -80,7 +80,7 @@ function Home() {
 
             {/* Input for to take the pertol or diesel density */}
             <h1 className='font-semibold text-xl'>Fuel Density</h1>
-            <input className="mb-2 py-2 px-2 rounded-md w-full outline-none border-2 focus:border-[#7741f6]" type="tel" name="FuelDensity" onChange={handleChange} placeholder="Fuel Density (optional) in numbers" />
+            <input className="mb-2 py-2 px-2 rounded-md w-full outline-none border-2 focus:border-[#7741f6]" type="tel" name="FuelDensity" onChange={handleChange} placeholder="Fuel Density (optional) in numbers format" />
 
             {/* Input for to take the first fuel stop point meter reading */}
             <h1 className='font-semibold text-xl'>First Fuel Point Meter Reading</h1>
