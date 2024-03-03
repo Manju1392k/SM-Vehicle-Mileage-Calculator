@@ -56,7 +56,7 @@ function Home() {
       toast.success('Data is saved')
     };
 
-    // var allFieldsFilled = Object.values(VehicleData).every((field) => field !== '');
+    var allFieldsFilled = Object.values(VehicleData).every((field) => field !== '');
 
   } catch (error) {
     toast("Something went wrong. Please try later")
@@ -115,7 +115,19 @@ function Home() {
             {/* When all the inputs are filled then this button will redirect resultspage or if the fields are not filled properly then it work has a button. */}
 
             {/* Button for submitting VehicleData to localStorage */}
-            <button className="bg-[#7741f6] py-2 px-6 rounded-lg text-white font-semibold hover:bg-[#8b5aff] active:bg-[#592bc3]" type="submit">Show Results</button>
+            <div className="flex flex-wrap">
+              <button className="bg-[#7741f6] py-2 px-6 rounded-lg text-white font-semibold hover:bg-[#8b5aff] active:bg-[#592bc3]" type="submit">Submit</button>
+
+              {allFieldsFilled ? <>
+                <Link to="/resultpage">
+                  <button className="mx-2 bg-[#7741f6] py-2 px-6 rounded-lg text-white font-semibold hover:bg-[#8b5aff] active:bg-[#592bc3]" type='button'>Show Result</button>
+                </Link>
+              </>
+                :
+                <>
+                </>
+              }
+            </div>
 
           </form>
         </div>

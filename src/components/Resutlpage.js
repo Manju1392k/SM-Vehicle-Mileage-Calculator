@@ -24,21 +24,28 @@ export default function Resutlpage() {
     }
   }, []);
 
-  const [vehicleData, setVehicleData] = useState({});
+  var [vehicleData, setVehicleData] = useState({});
 
   useEffect(() => {
     try {
-      // Get the data from localStorage
-      const storedVehicleData = localStorage.getItem('VehicleData');
-
-      // Parse the data and set it to state
-      if (storedVehicleData) {
-        setVehicleData(JSON.parse(storedVehicleData));
-      }
+      // Fetch the data from the server
+      fetch('http://localhost:3001/data')
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setVehicleData(data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
     } catch (error) {
       toast("Something went wrong. Please try later");
     }
-  }, []);
+  }, []); // Empty dependency array means this useEffect will only run once when the component mounts
 
   console.log(vehicleData)
 
