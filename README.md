@@ -6,13 +6,17 @@
 
 # 🌐 Preview of the Website
 
-
+https://github.com/Manju1392k/SM-Vehicle-Mileage-Calculator/assets/66934377/5440bacf-8a3d-4b26-807d-738c73dec658
 
 ---
 
 # 📱Preview of the Responsive Design
 
+<div align='center'>
 
+<img width="138" alt="Mobile Version" src="https://github.com/Manju1392k/SM-Vehicle-Mileage-Calculator/assets/66934377/1c91ffa9-aba3-47b4-9372-b4912bda1795">
+
+</div>
 
 ---
 
