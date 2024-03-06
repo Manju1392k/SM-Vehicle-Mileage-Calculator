@@ -122,14 +122,14 @@ export default function Resutlpage() {
 
           {/* Button to Download Results in pdf format*/}
           <button
-            className="bg-[#7741f6] py-2 px-6 rounded-lg text-white font-semibold hover:bg-[#8b5aff] active:bg-[#592bc3]"
+            className=" sm:mx-1 lg:mx-1 bg-[#7741f6] py-2 px-6 rounded-lg text-white font-semibold hover:bg-[#8b5aff] active:bg-[#592bc3]"
             onClick={() => window.print()}
           >
             Download PDF
           </button>
           {/* Button to take screen short in image format and saving in device */}
           <div>
-            <button className="mx-2 bg-[#7741f6] py-2 px-6 rounded-lg text-white font-semibold hover:bg-[#8b5aff] active:bg-[#592bc3]" onClick={captureScreenshot}>Take screenshot</button>
+            <button className="sm:my-2 lg:my-1 sm:mx-1 lg:mx-1 mx-1 bg-[#7741f6] py-2 px-6 rounded-lg text-white font-semibold hover:bg-[#8b5aff] active:bg-[#592bc3]" onClick={captureScreenshot}>Take screenshot</button>
           </div>
 
         </div>
