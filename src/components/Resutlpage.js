@@ -31,7 +31,7 @@ export default function Resutlpage() {
   useEffect(() => {
     try {
       // Fetch the data from the server
-      fetch('https://sm-mileage-calculator.vercel.app/data')
+      fetch('http://localhost:3001/data')
         .then((response) => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
