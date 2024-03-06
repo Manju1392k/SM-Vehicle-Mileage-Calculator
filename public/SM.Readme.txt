@@ -1,0 +1,11 @@
+
+The Vehicla data is saving in json file. In localhost:3001/data url.
+Saving data in json file is not good for production but this website is only personal use. So that I did not connected a database.
+
+This below command run two things. 
+npm run runserver.
+First thing it will run server.js file for data saving. Which is available in server fold.  In localhost:3000 port.
+Second thing is it will run the react application or website. In localhost:3000 port.
+ "scripts": {
+    "runserver": "concurrently \"npm run start\" \"npm run server\"",
+  },
