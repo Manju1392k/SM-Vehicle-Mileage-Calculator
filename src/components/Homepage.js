@@ -43,7 +43,7 @@ function Home() {
     var handleSubmit = (event) => {
       event.preventDefault();
 
-      fetch('https://sm-mileage-calculator.vercel.app/save', {
+      fetch('http://localhost:3001/save', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
