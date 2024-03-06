@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { Link } from "react-router-dom";
+import { click } from '@testing-library/user-event/dist/click';
 
 function Home() {
 
@@ -62,6 +63,26 @@ function Home() {
     toast("Something went wrong. Please try later")
   };
 
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // Function to flex the Showresults button and to disable the Submit button.
+  const Submitdata = () => {
+    var Submitbtn = document.getElementById('Submitbtn')
+    var Showresultsbtn = document.getElementById('Showresultsbtn')
+
+    if (allFieldsFilled) {
+      Submitbtn.style.display = 'none';
+      Showresultsbtn.style.display = 'flex';
+      // If the user click on Submit button. User can not edit the inputs values. To change the value user has to refresh the page
+      setIsSubmitted(true);
+    }
+    else {
+      Submitbtn.style.display = 'flex';
+      Showresultsbtn.style.display = 'none';
+    }
+  }
+
+
   return (
     <>
 
@@ -77,7 +98,7 @@ function Home() {
           <form className="flex flex-col items-start" method="post" onSubmit={handleSubmit}>
 
             {/* Select menu for To Choose Vehicle Type */}
-            <select className="my-2 bg-[#7741f6] text-white font-semibold py-2 px-2 rounded-md outline-none" name="vehicletype" onChange={handleChange} required={true}>
+            <select disabled={isSubmitted} className="my-2 bg-[#7741f6] text-white font-semibold py-2 px-2 rounded-md outline-none" name="vehicletype" onChange={handleChange} required={true}>
               <option value="Not Selected">Choose Vehicle</option>
               <option value="2 Wheeler">2 Wheeler</option>
               <option value="4 Wheeler">4 Wheeler</option>
@@ -85,7 +106,7 @@ function Home() {
             </select>
 
             {/* Select menu for To Choose Fuel Type */}
-            <select className="my-2 bg-[#7741f6] text-white font-semibold py-2 px-2 rounded-md outline-none" name="fueltype" onChange={handleChange} required={true}>
+            <select disabled={isSubmitted} className="my-2 bg-[#7741f6] text-white font-semibold py-2 px-2 rounded-md outline-none" name="fueltype" onChange={handleChange} required={true}>
               <option value="Not Selected">Choose Fuel</option>
               <option value="Petrol">Petrol</option>
               <option value="Diesel">Diesel</option>
@@ -94,39 +115,36 @@ function Home() {
 
             {/* Input for to take Pertol or Diesel per liter cost */}
             <h1 className='font-semibold text-xl'>Fuel Per liter Cost</h1>
-            <input className="mb-2 py-2 px-2 rounded-md w-full outline-none border-2 focus:border-[#7741f6]" type="tel" name="FuelPrice" onChange={handleChange} placeholder="Per liter of fuel in Rupess" required />
+            <input disabled={isSubmitted} className="mb-2 py-2 px-2 rounded-md w-full outline-none border-2 focus:border-[#7741f6]" type="tel" name="FuelPrice" onChange={handleChange} placeholder="Per liter of fuel in Rupess" required />
 
             {/* Input for to take how much price pertol or diesel is filled in tank */}
             <h1 className='font-semibold text-xl'>Total Refill of Fuel Amout</h1>
-            <input className="mb-2 py-2 px-2 rounded-md w-full outline-none border-2 focus:border-[#7741f6]" type="tel" name="TotalAmount" onChange={handleChange} placeholder="Total Amount in Rupess" required />
+            <input disabled={isSubmitted} className="mb-2 py-2 px-2 rounded-md w-full outline-none border-2 focus:border-[#7741f6]" type="tel" name="TotalAmount" onChange={handleChange} placeholder="Total Amount in Rupess" required />
 
             {/* Input for to take the pertol or diesel density */}
             <h1 className='font-semibold text-xl'>Fuel Density</h1>
-            <input className="mb-2 py-2 px-2 rounded-md w-full outline-none border-2 focus:border-[#7741f6]" type="tel" name="FuelDensity" onChange={handleChange} placeholder="Fuel Density (optional) in numbers format" />
+            <input disabled={isSubmitted} className="mb-2 py-2 px-2 rounded-md w-full outline-none border-2 focus:border-[#7741f6]" type="tel" name="FuelDensity" onChange={handleChange} placeholder="Fuel Density (optional) in numbers format" />
 
             {/* Input for to take the first fuel stop point meter reading */}
             <h1 className='font-semibold text-xl'>First Fuel Point Meter Reading</h1>
-            <input className="mb-2 py-2 px-2 rounded-md w-full outline-none border-2 focus:border-[#7741f6]" type="tel" name="FirstFuelPoint" onChange={handleChange} placeholder="First Fuel Point Meter Reading. Enter First Refill Fuel Meter Reading in numbers format" required />
+            <input disabled={isSubmitted} className="mb-2 py-2 px-2 rounded-md w-full outline-none border-2 focus:border-[#7741f6]" type="tel" name="FirstFuelPoint" onChange={handleChange} placeholder="First Fuel Point Meter Reading. Enter First Refill Fuel Meter Reading in numbers format" required />
 
             {/* Input for to take the Second fuel stop point meter reading */}
             <h1 className='font-semibold text-xl'>Second Fuel Point Meter Reading</h1>
-            <input className="mb-2 py-2 px-2 rounded-md w-full outline-none border-2 focus:border-[#7741f6]" type="tel" name="SecondFuelPoint" onChange={handleChange} placeholder="Second Fuel Point Meter Reading. Enter Second Refill Fuel Meter Reading in numbers format" required />
+            <input disabled={isSubmitted} className="mb-2 py-2 px-2 rounded-md w-full outline-none border-2 focus:border-[#7741f6]" type="tel" name="SecondFuelPoint" onChange={handleChange} placeholder="Second Fuel Point Meter Reading. Enter Second Refill Fuel Meter Reading in numbers format" required />
 
             {/* When all the inputs are filled then this button will redirect resultspage or if the fields are not filled properly then it work has a button. */}
 
             {/* Button for submitting VehicleData to localStorage */}
-            <div className="flex flex-wrap">
-              <button className="bg-[#7741f6] py-2 px-6 rounded-lg text-white font-semibold hover:bg-[#8b5aff] active:bg-[#592bc3]" type="submit">Submit</button>
+            <div className="flex flex-wrap" >
+              <button id='Submitbtn' className="transition-all duration-500 bg-[#7741f6] py-2 px-6 rounded-lg text-white font-semibold hover:bg-[#8b5aff] active:bg-[#592bc3]" type="submit" onClick={Submitdata}>Submit</button>
 
-              {allFieldsFilled ? <>
-                <Link to="/resultpage">
-                  <button className="mx-2 bg-[#7741f6] py-2 px-6 rounded-lg text-white font-semibold hover:bg-[#8b5aff] active:bg-[#592bc3]" type='button'>Show Result</button>
-                </Link>
-              </>
-                :
-                <>
-                </>
-              }
+
+              {/* Button to redirect to the results page when the user vehicle data is saved */}
+              <Link to="/resultpage">
+                <button id='Showresultsbtn' className="hidden transition-all duration-500 bg-[#2a7f36] py-2 px-6 rounded-lg text-white font-semibold hover:bg-[#8b5aff] active:bg-[#592bc3]" type='button'>Show Result</button>
+                <button id='Showresultsbtn' className="hidden transition-all duration-500 bg-[#2a7f36] py-2 px-6 rounded-lg text-white font-semibold hover:bg-[#8b5aff] active:bg-[#592bc3]" type='button'>Show Result</button>
+              </Link>
             </div>
 
           </form>
